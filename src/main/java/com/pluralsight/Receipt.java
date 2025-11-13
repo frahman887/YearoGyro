@@ -6,9 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 
-/**
- * Handles receipt generation and file saving
- */
+// receipt and files from each order
 public class Receipt {
     private static final String RECEIPTS_FOLDER = "receipts/";
     private static final DateTimeFormatter FILE_NAME_FORMATTER =
@@ -20,17 +18,12 @@ public class Receipt {
         this.order = order;
     }
 
-    /**
-     * Generates the receipt content as a string
-     */
+    //return the detailed receipt info from the order
     public String generateReceipt() {
         return order.getDetailedOrderString();
     }
 
-    /**
-     * Generates the filename for this receipt based on order time
-     * Format: yyyyMMdd-HHmmss.txt (e.g., 20230329-121523.txt)
-     */
+    //each receipt has the time as its name like how on mac screenshots are timestamps
     private String getFileName() {
         String timestamp = order.getOrderTime().format(FILE_NAME_FORMATTER);
         return RECEIPTS_FOLDER + timestamp + ".txt";

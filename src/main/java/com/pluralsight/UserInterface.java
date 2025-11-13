@@ -132,9 +132,7 @@ public class UserInterface {
         System.out.println(sandwich);
     }
 
-    /**
-     * Prompts user to select sandwich size
-     */
+
     private SandwichSize selectSize() {
         System.out.println("Select sandwich size:");
         System.out.println("1) 4\" - $" + SandwichSize.SMALL.getBasePrice());
@@ -153,9 +151,7 @@ public class UserInterface {
         }
     }
 
-    /**
-     * Prompts user to select bread type
-     */
+
     private BreadType selectBread() {
         System.out.println("\nSelect bread type:");
         System.out.println("1) White");
@@ -176,9 +172,7 @@ public class UserInterface {
         }
     }
 
-    /**
-     * Prompts user to add meats
-     */
+
     private void addMeats(Sandwich sandwich) {
         boolean addingMeats = true;
 
@@ -211,19 +205,20 @@ public class UserInterface {
                     System.out.println("Invalid choice.");
                     continue;
             }
-
+// extra option
             System.out.print("Extra meat? (yes/no): ");
             String extraChoice = scanner.nextLine().trim().toLowerCase();
+            //normalize to lower case
             boolean extra = extraChoice.equals("yes") || extraChoice.equals("y");
-
+//check for yes or y
             sandwich.addTopping(new Meat(meatType, extra));
-            System.out.println("✓ " + meatType.getDisplayName() + (extra ? " (Extra)" : "") + " added!");
+
+            System.out.println(meatType.getDisplayName() + (extra ? " (Extra)" : "") + " added!");
+            //gets meat type if extra is true "Extra added" else "x added"
         }
     }
 
-    /**
-     * Prompts user to add cheese
-     */
+
     private void addCheese(Sandwich sandwich) {
         boolean addingCheese = true;
 
@@ -258,13 +253,11 @@ public class UserInterface {
             boolean extra = extraChoice.equals("yes") || extraChoice.equals("y");
 
             sandwich.addTopping(new Cheese(cheeseType, extra));
-            System.out.println("✓ " + cheeseType.getDisplayName() + (extra ? " (Extra)" : "") + " added!");
+            System.out.println(cheeseType.getDisplayName() + (extra ? " (Extra)" : "") + " added!");
         }
     }
 
-    /**
-     * Prompts user to add regular toppings
-     */
+    //standard toppings
     private void addRegularToppings(Sandwich sandwich) {
         System.out.println("\nAdd regular toppings (comma-separated numbers, or 'done'):");
         System.out.println("1) Lettuce    2) Peppers    3) Onions");
@@ -274,11 +267,12 @@ public class UserInterface {
 
         String input = scanner.nextLine().trim().toLowerCase();
 
-        if (input.equals("done") || input.isEmpty()) {
+        if (input.equals("done") || input.isEmpty()) { // no toppings or whatever chosen
             return;
         }
 
-        String[] choices = input.split(",");
+        String[] choices = input.split(","); //take comma separated values and split by ,
+        //each string value is now read
         for (String choice : choices) {
             choice = choice.trim();
             switch (choice) {
@@ -291,14 +285,14 @@ public class UserInterface {
                 case "7": sandwich.addTopping(RegularTopping.pickles()); break;
                 case "8": sandwich.addTopping(RegularTopping.guacamole()); break;
                 case "9": sandwich.addTopping(RegularTopping.mushrooms()); break;
+                default:
+                    System.out.println("invalid choice: " + choice); //if messed up; invalid
             }
         }
-        System.out.println("✓ Regular toppings added!");
+        System.out.println("Regular toppings added!");
     }
 
-    /**
-     * Prompts user to add sauces
-     */
+
     private void addSauces(Sandwich sandwich) {
         System.out.println("\nAdd sauces (comma-separated numbers, or 'done'):");
         System.out.println("1) Mayo          2) Mustard       3) Ketchup");
@@ -323,14 +317,14 @@ public class UserInterface {
                 case "5": sandwich.addTopping(Sauce.thousandIslands()); break;
                 case "6": sandwich.addTopping(Sauce.vinaigrette()); break;
                 case "7": sandwich.addTopping(Sauce.auJus()); break;
+                default:
+                    System.out.println("invalid choice: " + choice);
             }
         }
-        System.out.println("✓ Sauces added!");
+        System.out.println("Sauces added!");
     }
 
-    /**
-     * Prompts user to add a drink
-     */
+
     private void addDrink() {
         System.out.println("\n*** Add Drink ***\n");
 
@@ -354,7 +348,7 @@ public class UserInterface {
         }
 
         // Select flavor
-        System.out.print("\nEnter drink flavor (e.g., Coke, Sprite, Lemonade): ");
+        System.out.print("\nEnter drink flavor: ");
         String flavor = scanner.nextLine().trim();
 
         if (flavor.isEmpty()) {
@@ -364,16 +358,14 @@ public class UserInterface {
 
         Drink drink = new Drink(size, flavor);
         currentOrder.addDrink(drink);
-        System.out.println("\n✓ Drink added to order!");
+        System.out.println("\nDrink added to order!");
         System.out.println(drink);
     }
 
-    /**
-     * Prompts user to add chips
-     */
+
     private void addChips() {
         System.out.println("\n*** Add Chips ***\n");
-        System.out.print("Enter chip type (e.g., Lay's, Doritos, Pringles): ");
+        System.out.print("Enter chip type: ");
         String type = scanner.nextLine().trim();
 
         if (type.isEmpty()) {
@@ -383,13 +375,11 @@ public class UserInterface {
 
         Chips chips = new Chips(type);
         currentOrder.addChips(chips);
-        System.out.println("\n✓ Chips added to order!");
+        System.out.println("\n Chips added to order!");
         System.out.println(chips);
     }
 
-    /**
-     * Displays checkout screen and processes order
-     */
+
     private void checkout() {
         if (currentOrder.isEmpty()) {
             System.out.println("\nYour order is empty! Please add items before checking out.");
@@ -407,14 +397,14 @@ public class UserInterface {
         String confirm = scanner.nextLine().trim().toLowerCase();
 
         if (confirm.equals("yes") || confirm.equals("y")) {
-            Receipt receipt = new Receipt(currentOrder);
+            Receipt receipt = new Receipt(currentOrder); //receipt object
             receipt.printToConsole();
 
             if (receipt.saveToFile()) {
-                System.out.println("\n✓ Order completed successfully!");
+                System.out.println("\n Order completed successfully!");
                 System.out.println("Receipt saved to: " + receipt.getReceiptFileName());
             } else {
-                System.out.println("\n⚠ Order completed but receipt could not be saved.");
+                System.out.println("\n Order completed but receipt could not be saved.");
             }
 
             currentOrder = null;

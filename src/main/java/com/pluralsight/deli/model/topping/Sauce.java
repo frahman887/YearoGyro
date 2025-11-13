@@ -34,7 +34,7 @@ public class Sauce implements Topping {
         return name;
     }
 
-    // Static factory methods for common sauces
+    // basic methods for common sauces
     public static Sauce mayo() {
         return new Sauce("Mayo");
     }

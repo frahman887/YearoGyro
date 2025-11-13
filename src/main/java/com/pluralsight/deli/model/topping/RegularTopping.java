@@ -34,7 +34,7 @@ public class RegularTopping implements Topping {
         return name;
     }
 
-    // Static factory methods for common regular toppings
+    // basic methods for common regular toppings
     public static RegularTopping lettuce() {
         return new RegularTopping("Lettuce");
     }

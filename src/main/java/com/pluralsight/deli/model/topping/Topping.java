@@ -3,29 +3,15 @@ package com.pluralsight.deli.model.topping;
 import com.pluralsight.deli.model.enums.SandwichSize;
 
 public interface Topping {
-    /**
-     * Gets the name/description of the topping
-     * @return The topping name
-     */
+    //name of topping
     String getName();
 
-    /**
-     * Calculates the price of this topping based on sandwich size
-     * @param size The size of the sandwich
-     * @return The price for this topping
-     */
+    //takes size and returns price of topping
     double getPrice(SandwichSize size);
 
-    /**
-     * Checks if this topping has extra quantity
-     * @return true if extra, false otherwise
-     */
+    //checks if topping is extra
     boolean isExtra();
 
-    /**
-     * Gets a formatted string for display/receipt purposes
-     * @param size The sandwich size (for price display)
-     * @return Formatted string representation
-     */
+    // formatted return for receipt or display
     String getDisplayString(SandwichSize size);
 }
