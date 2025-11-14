@@ -1,5 +1,6 @@
-package com.pluralsight.deli.model.product;
-import com.pluralsight.deli.model.enums.*;
+package com.pluralsight.YearoGyro.model.product;
+import com.pluralsight.YearoGyro.model.enums.DrinkSize;
+import com.pluralsight.YearoGyro.model.enums.*;
 
 public class Drink {
     private final DrinkSize size;

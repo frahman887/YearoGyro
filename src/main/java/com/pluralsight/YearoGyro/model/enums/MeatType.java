@@ -1,4 +1,4 @@
-package com.pluralsight.deli.model.enums;
+package com.pluralsight.YearoGyro.model.enums;
 
 public enum MeatType {
     STEAK("Steak"),

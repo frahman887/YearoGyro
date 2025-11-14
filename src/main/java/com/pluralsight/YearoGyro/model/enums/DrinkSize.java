@@ -1,4 +1,4 @@
-package com.pluralsight.deli.model.enums;
+package com.pluralsight.YearoGyro.model.enums;
 //enums just like before keeps people tied to  these size options while keeping a defined price as well
 public enum DrinkSize {
     SMALL("Small", 2.00),

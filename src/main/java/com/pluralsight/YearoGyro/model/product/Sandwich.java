@@ -1,7 +1,10 @@
-package com.pluralsight.deli.model.product;
+package com.pluralsight.YearoGyro.model.product;
 
-import com.pluralsight.deli.model.topping.*;
-import com.pluralsight.deli.model.enums.*;
+import com.pluralsight.YearoGyro.model.enums.BreadType;
+import com.pluralsight.YearoGyro.model.enums.SandwichSize;
+import com.pluralsight.YearoGyro.model.topping.Topping;
+import com.pluralsight.YearoGyro.model.topping.*;
+import com.pluralsight.YearoGyro.model.enums.*;
 
 import java.util.ArrayList;
 import java.util.List;

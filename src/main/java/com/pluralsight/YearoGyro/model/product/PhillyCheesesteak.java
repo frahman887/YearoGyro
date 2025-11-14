@@ -1,7 +1,8 @@
-package com.pluralsight.deli.model.product;
+package com.pluralsight.YearoGyro.model.product;
 
-import com.pluralsight.deli.model.enums.*;
-import com.pluralsight.deli.model.topping.*;
+import com.pluralsight.YearoGyro.model.enums.*;
+import com.pluralsight.YearoGyro.model.topping.*;
+
 
 //Philly Cheese Steak Signature Sandwich
 //8" white bread with Steak, American Cheese, Peppers, Mayo, Toasted

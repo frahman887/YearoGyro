@@ -1,6 +1,6 @@
-package com.pluralsight.deli.model.topping;
+package com.pluralsight.YearoGyro.model.topping;
 
-import com.pluralsight.deli.model.enums.*;
+import com.pluralsight.YearoGyro.model.enums.*;
 
 public class RegularTopping implements Topping {
     private final String name;

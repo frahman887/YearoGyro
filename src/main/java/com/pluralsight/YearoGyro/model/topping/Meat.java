@@ -1,11 +1,11 @@
-package com.pluralsight.deli.model.topping;
-import com.pluralsight.deli.model.enums.*;
+package com.pluralsight.YearoGyro.model.topping;
+import com.pluralsight.YearoGyro.model.enums.*;
 
-public class Cheese implements Topping {
-    private final CheeseType type;
+public class Meat implements Topping {
+    private final MeatType type;
     private final boolean extra;
 
-    public Cheese(CheeseType type, boolean extra) {
+    public Meat(MeatType type, boolean extra) {
         this.type = type;
         this.extra = extra;
     }
@@ -17,9 +17,9 @@ public class Cheese implements Topping {
 
     @Override
     public double getPrice(SandwichSize size) {
-        double basePrice = size.getCheesePrice();
+        double basePrice = size.getMeatPrice();
         if (extra) {
-            basePrice += size.getExtraCheesePrice();
+            basePrice += size.getExtraMeatPrice();
         }
         return basePrice;
     }
@@ -29,18 +29,18 @@ public class Cheese implements Topping {
         return extra;
     }
 
-    public CheeseType getType() {
+    public MeatType getType() {
         return type;
     }
 
     @Override
     public String getDisplayString(SandwichSize size) {
-        String extraText = extra ? " (Extra)" : ""; //if true return extra else nothing
+        String extraText = extra ? "(Extra)" : "";
         return String.format("%s%s - $%.2f", type.getDisplayName(), extraText, getPrice(size));
     }
-
+//same as cheese
     @Override
     public String toString() {
-        return extra ? type.getDisplayName() + " (Extra)" : type.getDisplayName(); //if return extra else just type
+        return extra ? type.getDisplayName() + " (Extra)" : type.getDisplayName();
     }
 }

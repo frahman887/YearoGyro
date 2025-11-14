@@ -1,6 +1,6 @@
-package com.pluralsight.deli.model.topping;
+package com.pluralsight.YearoGyro.model.topping;
 
-import com.pluralsight.deli.model.enums.SandwichSize;
+import com.pluralsight.YearoGyro.model.enums.SandwichSize;
 
 public interface Topping {
     //name of topping

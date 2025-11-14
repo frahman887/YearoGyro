@@ -1,8 +1,10 @@
-package com.pluralsight;
+package com.pluralsight.YearoGyro.ui;
 
-import com.pluralsight.deli.model.enums.*;
-import com.pluralsight.deli.model.product.*;
-import com.pluralsight.deli.model.topping.*;
+import com.pluralsight.Receipt;
+import com.pluralsight.YearoGyro.model.enums.*;
+import com.pluralsight.YearoGyro.model.product.*;
+import com.pluralsight.YearoGyro.model.topping.*;
+
 import java.util.*;
 //Warning most of UI is just: run a method that takes int input; runs cases based on that. very simple stuff
 public class UserInterface {
@@ -38,13 +40,17 @@ public class UserInterface {
 
     //Home screen
     private void displayHomeScreen() {
-        System.out.println("\n" + "=".repeat(50)); //yes i searched up how to make a border without typing it all
-        System.out.println("         Welcome to Yearo Gyro!");
-        System.out.println("=".repeat(50)); //makes the code cleaner
-        System.out.println("1) New Order");
-        System.out.println("0) Exit");
-        System.out.print("\nPlease select an option: ");
-    }
+        System.out.println("\n");
+        System.out.println(Colors.BOLD_CYAN + "  ╦ ╦╔═╗╔═╗╦═╗╔═╗  ╔═╗╦ ╦╦═╗╔═╗" + Colors.RESET);
+        System.out.println(Colors.BOLD_CYAN + "  ╚╦╝║╣ ╠═╣╠╦╝║ ║  ║ ╦╚╦╝╠╦╝║ ║" + Colors.RESET);
+        System.out.println(Colors.BOLD_CYAN + "   ╩ ╚═╝╩ ╩╩╚═╚═╝  ╚═╝ ╩ ╩╚═╚═╝" + Colors.RESET);
+        System.out.println();
+        System.out.println(Colors.YELLOW + "          Custom Sandwich Shop  " + Colors.RESET);
+        System.out.println(Colors.CYAN + "╔══════════════════════════════════════════════╗" + Colors.RESET);
+        System.out.println(Colors.CYAN + "║" + Colors.RESET + "  " + Colors.BOLD_GREEN + "1)" + Colors.RESET + " New Order                               " + Colors.CYAN + "║" + Colors.RESET);
+        System.out.println(Colors.CYAN + "║" + Colors.RESET + "  " + Colors.BOLD_RED + "0)" + Colors.RESET + " Exit                                    " + Colors.CYAN + "║" + Colors.RESET);
+        System.out.println(Colors.CYAN + "╚══════════════════════════════════════════════╝" + Colors.RESET);
+        System.out.print("\n" + Colors.BOLD + "Please select an option: " + Colors.RESET);}
 
     private void startNewOrder() {
         currentOrder = new Order();
@@ -57,16 +63,17 @@ public class UserInterface {
         boolean ordering = true;
 
         while (ordering) {
-            System.out.println("\n" + "=".repeat(50));
-            System.out.println("ORDER MENU");
-            System.out.println("=".repeat(50));
-            System.out.println("1) Add Sandwich");
-            System.out.println("2) Add Signature Sandwich");
-            System.out.println("3) Add Drink");
-            System.out.println("4) Add Chips");
-            System.out.println("5) Checkout");
-            System.out.println("0) Cancel Order");
-            System.out.print("\nSelect an option: ");
+            System.out.println("\n" + Colors.CYAN + "╔══════════════════════════════════════════════╗" + Colors.RESET);
+            System.out.println(Colors.CYAN + "║" + Colors.RESET + Colors.BOLD_YELLOW + "            ORDER MENU                        " + Colors.RESET + Colors.CYAN + "║" + Colors.RESET);
+            System.out.println(Colors.CYAN + "╠══════════════════════════════════════════════╣" + Colors.RESET);
+            System.out.println(Colors.CYAN + "║" + Colors.RESET + "  " + Colors.GREEN + "1)" + Colors.RESET + " Add Sandwich                           " + Colors.CYAN + "║" + Colors.RESET);
+            System.out.println(Colors.CYAN + "║" + Colors.RESET + "  " + Colors.GREEN + "2)" + Colors.RESET + " Add Signature Sandwich                 " + Colors.CYAN + "║" + Colors.RESET);
+            System.out.println(Colors.CYAN + "║" + Colors.RESET + "  " + Colors.GREEN + "3)" + Colors.RESET + " Add Drink                              " + Colors.CYAN + "║" + Colors.RESET);
+            System.out.println(Colors.CYAN + "║" + Colors.RESET + "  " + Colors.GREEN + "4)" + Colors.RESET + " Add Chips                              " + Colors.CYAN + "║" + Colors.RESET);
+            System.out.println(Colors.CYAN + "║" + Colors.RESET + "  " + Colors.BOLD_GREEN + "5)" + Colors.RESET + " Checkout                               " + Colors.CYAN + "║" + Colors.RESET);
+            System.out.println(Colors.CYAN + "║" + Colors.RESET + "  " + Colors.RED + "0)" + Colors.RESET + " Cancel Order                           " + Colors.CYAN + "║" + Colors.RESET);
+            System.out.println(Colors.CYAN + "╚══════════════════════════════════════════════╝" + Colors.RESET);
+            System.out.print("\n" + Colors.BOLD + "Select an option: " + Colors.RESET);
 
             String choice = scanner.nextLine().trim();
 

@@ -1,4 +1,4 @@
-package com.pluralsight.deli.model.product;
+package com.pluralsight.YearoGyro.model.product;
 
 public class Chips {
     private static final double CHIPS_PRICE = 1.50; //price of chips does not change

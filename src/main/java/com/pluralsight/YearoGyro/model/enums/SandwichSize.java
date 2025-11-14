@@ -1,4 +1,4 @@
-package com.pluralsight.deli.model.enums;
+package com.pluralsight.YearoGyro.model.enums;
 
 //give " value and prices for all possible add ons
 //since all are tied to the size i just lumped it all together

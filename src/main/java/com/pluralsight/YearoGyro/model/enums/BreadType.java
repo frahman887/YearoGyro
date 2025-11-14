@@ -1,4 +1,4 @@
-package com.pluralsight.deli.model.enums;
+package com.pluralsight.YearoGyro.model.enums;
 //enums stops customers from getting stuff outside of the options also helps check for things
 //in "range" so i do dont have to go around using try catch or qualifying if statements
 //yes i had a discussion with the goat Ajith and Malika about the usage of enums

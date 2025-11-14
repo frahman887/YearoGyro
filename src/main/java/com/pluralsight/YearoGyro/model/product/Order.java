@@ -1,4 +1,4 @@
-package com.pluralsight.deli.model.product;
+package com.pluralsight.YearoGyro.model.product;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
