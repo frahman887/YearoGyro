@@ -3,8 +3,7 @@ package com.pluralsight;
 import com.pluralsight.deli.model.enums.*;
 import com.pluralsight.deli.model.product.*;
 import com.pluralsight.deli.model.topping.*;
-import java.util.Scanner;
-
+import java.util.*;
 //Warning most of UI is just: run a method that takes int input; runs cases based on that. very simple stuff
 public class UserInterface {
     private final Scanner scanner;
@@ -62,9 +61,10 @@ public class UserInterface {
             System.out.println("ORDER MENU");
             System.out.println("=".repeat(50));
             System.out.println("1) Add Sandwich");
-            System.out.println("2) Add Drink");
-            System.out.println("3) Add Chips");
-            System.out.println("4) Checkout");
+            System.out.println("2) Add Signature Sandwich");
+            System.out.println("3) Add Drink");
+            System.out.println("4) Add Chips");
+            System.out.println("5) Checkout");
             System.out.println("0) Cancel Order");
             System.out.print("\nSelect an option: ");
 
@@ -75,12 +75,15 @@ public class UserInterface {
                     addSandwich();
                     break;
                 case "2":
-                    addDrink();
+                    addSignatureSandwich();
                     break;
                 case "3":
-                    addChips();
+                    addDrink();
                     break;
                 case "4":
+                    addChips();
+                    break;
+                case "5":
                     checkout();
                     ordering = false;
                     break;
@@ -94,7 +97,6 @@ public class UserInterface {
             }
         }
     }
-
     //subway style ordering methodology
     private void addSandwich() {
         System.out.println("\n*** Add Sandwich ***\n");
@@ -121,14 +123,24 @@ public class UserInterface {
 
         // Add sauces
         addSauces(sandwich);
-
+        // Add sides
+        addSides(sandwich);
         // Toast option
         System.out.print("\nWould you like the sandwich toasted? (yes/no): ");
         String toastChoice = scanner.nextLine().trim().toLowerCase();
         sandwich.setToasted(toastChoice.equals("yes") || toastChoice.equals("y"));
 
+        // lets you view the sandwich made and lets you customize like the specialties
+        System.out.println("\nSandwich created!");
+        System.out.println(sandwich);
+        System.out.print("\nWould you like to customize this sandwich? (yes/no): ");
+        String customizeChoice = scanner.nextLine().trim().toLowerCase();
+
+        if (customizeChoice.equals("yes") || customizeChoice.equals("y")) {
+            customizeSandwich(sandwich);
+        }
         currentOrder.addSandwich(sandwich);
-        System.out.println("\n✓ Sandwich added to order!");
+        System.out.println("\n Sandwich added to order!");
         System.out.println(sandwich);
     }
 
@@ -297,7 +309,7 @@ public class UserInterface {
         System.out.println("\nAdd sauces (comma-separated numbers, or 'done'):");
         System.out.println("1) Mayo          2) Mustard       3) Ketchup");
         System.out.println("4) Ranch         5) Thousand Islands");
-        System.out.println("6) Vinaigrette   7) Au Jus");
+        System.out.println("6) Vinaigrette");
         System.out.print("Choices: ");
 
         String input = scanner.nextLine().trim().toLowerCase();
@@ -316,7 +328,6 @@ public class UserInterface {
                 case "4": sandwich.addTopping(Sauce.ranch()); break;
                 case "5": sandwich.addTopping(Sauce.thousandIslands()); break;
                 case "6": sandwich.addTopping(Sauce.vinaigrette()); break;
-                case "7": sandwich.addTopping(Sauce.auJus()); break;
                 default:
                     System.out.println("invalid choice: " + choice);
             }
@@ -324,7 +335,217 @@ public class UserInterface {
         System.out.println("Sauces added!");
     }
 
+    private void addSides(Sandwich sandwich) {
+        boolean addingSides = true;
 
+        while (addingSides) {
+            System.out.println("\nAdd sides? (or 'done' to finish)");
+            System.out.println("1) Au Jus");
+            System.out.println("2) Sauce");
+            System.out.print("Choice: ");
+
+            String choice = scanner.nextLine().trim().toLowerCase();
+
+            if (choice.equals("done") || choice.isEmpty()) {
+                addingSides = false;
+                continue;
+            }
+
+            switch (choice) {
+                case "1":
+                    sandwich.addTopping(Side.auJus());
+                    System.out.println("Au Jus added!");
+                    break;
+                case "2":
+                    // Show the sauces menu but add as sides
+                    addSideSauces(sandwich);
+                    break;
+                default:
+                    System.out.println("Invalid choice.");
+            }
+        }
+    }
+
+    // extra sauces are a side kind of like those packets of ranch at McD
+    private void addSideSauces(Sandwich sandwich) {
+        System.out.println("\nSelect sauce for side (comma-separated numbers, or 'done'):");
+        System.out.println("1) Mayo          2) Mustard       3) Ketchup");
+        System.out.println("4) Ranch         5) Thousand Islands");
+        System.out.println("6) Vinaigrette");
+        System.out.print("Choices: ");
+
+        String input = scanner.nextLine().trim().toLowerCase();
+
+        if (input.equals("done") || input.isEmpty()) {
+            return;
+        }
+
+        String[] choices = input.split(",");
+
+        for (int i = 0; i < choices.length; i++) {
+            String choice = choices[i].trim();
+
+            // Add as SIDE sauce (not regular sauce)
+            switch (choice) {
+                case "1": sandwich.addTopping(Side.mayo()); break;
+                case "2": sandwich.addTopping(Side.mustard()); break;
+                case "3": sandwich.addTopping(Side.ketchup()); break;
+                case "4": sandwich.addTopping(Side.ranch()); break;
+                case "5": sandwich.addTopping(Side.thousandIslands()); break;
+                case "6": sandwich.addTopping(Side.vinaigrette()); break;
+            }
+        }
+    }
+    private void addSignatureSandwich() {
+        System.out.println("\n*** Signature Sandwiches ***\n");
+        System.out.println("1) BLT"); //only the two on the capstone BLT and Philly
+        System.out.println("   8\" White bread, Bacon, Cheddar, Lettuce, Tomato, Ranch (Toasted)");
+        System.out.println("   $" + new BLT().getPrice());
+        System.out.println();
+        System.out.println("2) Philly Cheese Steak");
+        System.out.println("   8\" White bread, Steak, American, Peppers, Mayo (Toasted)");
+        System.out.println("   $" + new PhillyCheesesteak().getPrice());
+        System.out.println();
+        System.out.println("0) Go Back");
+        System.out.print("\nSelect a signature sandwich: ");
+
+        String choice = scanner.nextLine().trim();
+        Sandwich sandwich = null;
+
+        switch (choice) {
+            case "1":
+                sandwich = new BLT();
+                System.out.println("\n BLT selected!");
+                break;
+            case "2":
+                sandwich = new PhillyCheesesteak();
+                System.out.println("\n Philly Cheese Steak selected!");
+                break;
+            case "0":
+                return;
+            default:
+                System.out.println("Invalid choice. Returning to menu.");
+                return;
+        }
+
+        // Show current toppings
+        System.out.println("\nCurrent sandwich: " + sandwich);
+        System.out.println("\nWould you like to customize this sandwich? (yes/no): ");
+        String customize = scanner.nextLine().trim().toLowerCase();
+
+        if (customize.equals("yes") || customize.equals("y")) {
+            customizeSandwich(sandwich);
+        }
+
+        currentOrder.addSandwich(sandwich);
+        System.out.println("\n Signature sandwich added to order!");
+        System.out.println(sandwich);
+    }
+
+    //basically another menuing thing
+    private void customizeSandwich(Sandwich sandwich) {
+        boolean customizing = true;
+
+        while (customizing) { //gets current toppings
+            System.out.println("\n=== CUSTOMIZE SANDWICH ===");
+            System.out.println("Current toppings:");
+            int index = 1;
+            for (Topping topping : sandwich.getToppings()) {
+                System.out.println("  " + index + ") " + topping.toString());
+                index++;
+            }
+
+            System.out.println("\n1) Remove a topping");
+            System.out.println("2) Add more meats");
+            System.out.println("3) Add more cheese");
+            System.out.println("4) Add more regular toppings");
+            System.out.println("5) Add more sauces");
+            System.out.println("6) Add sides");
+            System.out.println("7) change toasted status? (Currently: " + (sandwich.isToasted() ? "Toasted" : "Not Toasted") + ")");
+            System.out.println("0) Done customizing"); //if true returns Toasted if false returns "Not Toasted"
+            System.out.print("\nChoice: ");
+
+            String choice = scanner.nextLine().trim();
+
+            switch (choice) {
+                case "1":
+                    removeTopping(sandwich);
+                    break;
+                case "2":
+                    addMeats(sandwich);
+                    break;
+                case "3":
+                    addCheese(sandwich);
+                    break;
+                case "4":
+                    addRegularToppings(sandwich);
+                    break;
+                case "5":
+                    addSauces(sandwich);
+                    break;
+                case "6":
+                    addSides(sandwich);
+                    break;
+                case "7":
+                    sandwich.setToasted(!sandwich.isToasted()); //default is not toasted
+                    System.out.println(" Sandwich is now " + (sandwich.isToasted() ? "toasted" : "not toasted"));
+                    break;
+                case "0":
+                    customizing = false;
+                    break;
+                default:
+                    System.out.println("Invalid option.");
+            }
+        }
+    }
+
+    //removes if the list of toppings isnt empty
+    private void removeTopping(Sandwich sandwich) {
+        List<Topping> toppings = sandwich.getToppings();
+
+        if (toppings.isEmpty()) {
+            System.out.println("No toppings to remove!");
+            return;
+        }
+
+        System.out.println("\nSelect topping to remove:");
+        for (int i = 0; i < toppings.size(); i++) {
+            System.out.println((i + 1) + ") " + toppings.get(i).toString());
+            //print list with regular count ie: 1)tomato, 2)cucumber, 3) instead of 0) let, 1)toma ,2,3
+            //to string shows extra and name of topping
+        }
+        while (true) {
+            System.out.print("Choice (0 to cancel): ");
+            int choice;
+
+            try {
+                choice = scanner.nextInt();   // read an int
+            } catch (java.util.InputMismatchException e) { //catch for bad input
+                System.out.println("Invalid input. Please enter a number.");
+                scanner.nextLine(); // eat input
+                continue;           // go back to top of loop
+            }
+
+            scanner.nextLine(); // consume after nextInt
+
+            if (choice == 0) {
+                System.out.println("Canceled.");
+                return; // exit
+            }
+
+            if (choice > 0 && choice <= toppings.size()) {
+                // has to account for 0 base counting
+                Topping removed = toppings.get(choice - 1);
+                sandwich.removeTopping(removed);
+                System.out.println("Removed: " + removed.toString());
+                break;
+            } else {
+                System.out.println("Invalid choice. Enter a number between 1 and "
+                        + toppings.size() + " or 0 to cancel.");
+            }
+        }
+
+    }
     private void addDrink() {
         System.out.println("\n*** Add Drink ***\n");
 
@@ -382,7 +603,7 @@ public class UserInterface {
 
     private void checkout() {
         if (currentOrder.isEmpty()) {
-            System.out.println("\nYour order is empty! Please add items before checking out.");
+            System.out.println("\nYour order is empty! Add items to check out.");
             return;
         }
 

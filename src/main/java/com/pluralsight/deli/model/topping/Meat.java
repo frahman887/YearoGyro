@@ -35,7 +35,7 @@ public class Meat implements Topping {
 
     @Override
     public String getDisplayString(SandwichSize size) {
-        String extraText = extra ? " (Extra)" : "";
+        String extraText = extra ? "(Extra)" : "";
         return String.format("%s%s - $%.2f", type.getDisplayName(), extraText, getPrice(size));
     }
 //same as cheese

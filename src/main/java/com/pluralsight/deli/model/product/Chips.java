@@ -18,11 +18,11 @@ public class Chips {
 
     @Override
     public String toString() {
-        return String.format("%s Chips - $%.2f", type, getPrice());
+        return String.format("%s Chips - $%.2f", getType(), getPrice());
     }
 
     //shows the full type of chip will be helpful for receipts
     public String getDetailedString() {
-        return type + " Chips";
+        return getType() + " Chips";
     }
 }

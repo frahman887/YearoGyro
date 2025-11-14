@@ -24,11 +24,11 @@ public class Drink {
 
     @Override
     public String toString() {
-        return String.format("%s %s - $%.2f", size.getDisplayName(), flavor, getPrice());
+        return String.format("%s %s - $%.2f", size.getDisplayName(), getFlavor(), getPrice());
     }
 
 
     public String getDetailedString() {
-        return String.format("%s %s Drink", size.getDisplayName(), flavor);
+        return String.format("%s %s Drink", size.getDisplayName(), getFlavor());
     }
 }

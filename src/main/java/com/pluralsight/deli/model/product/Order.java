@@ -176,9 +176,7 @@ public class Order {
         return stringBuilder.toString();
     }
 
-    /**
-     * Checks if the order is empty
-     */
+    //check if empty
     public boolean isEmpty() {
         return sandwiches.isEmpty() && drinks.isEmpty() && chips.isEmpty();
     }

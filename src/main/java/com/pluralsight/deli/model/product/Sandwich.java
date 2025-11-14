@@ -40,17 +40,14 @@ public class Sandwich {
     }
 
     public List<Topping> getToppings() {
-        return new ArrayList<>(toppings); // Return copy for encapsulation
+        return new ArrayList<>(toppings); // Return copy so if cleared original toppings does not change
     }
 
     public boolean isToasted() {
         return toasted;
     }
 
-    /**
-     * Calculates the total price of this sandwich
-     * Base price (includes bread) + all topping prices
-     */
+    //enums helps here because of size and default pricing
     public double getPrice() {
         double total = size.getBasePrice();
 
@@ -63,54 +60,54 @@ public class Sandwich {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(String.format("%s %s Sandwich", size.getDisplayName(), bread.getDisplayName()));
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(String.format("%s %s Sandwich", size.getDisplayName(), bread.getDisplayName()));
 
-        if (toasted) {
-            sb.append(" (Toasted)");
+        if (isToasted()) {
+            stringBuilder.append(" (Toasted)");
         }
 
         if (!toppings.isEmpty()) {
-            sb.append(" with ");
+            stringBuilder.append(" with ");
             for (int i = 0; i < toppings.size(); i++) {
-                sb.append(toppings.get(i).getName());
+                stringBuilder.append(toppings.get(i).toString());
                 if (i < toppings.size() - 1) {
-                    sb.append(", ");
+                    stringBuilder.append(", ");
                 }
             }
         }
 
-        sb.append(String.format(" - $%.2f", getPrice()));
-        return sb.toString();
+        stringBuilder.append(String.format(" - $%.2f", getPrice()));
+        return stringBuilder.toString();
     }
 
     /**
      * Gets a detailed multi-line string for receipt printing
      */
     public String getDetailedString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(String.format("%s %s Sandwich%s\n",
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(String.format("%s %s Sandwich%s\n",
                 size.getDisplayName(),
                 bread.getDisplayName(),
                 toasted ? " (Toasted)" : ""));
 
-        sb.append(String.format("  Base Price: $%.2f\n", size.getBasePrice()));
+        stringBuilder.append(String.format("  Base Price: $%.2f\n", size.getBasePrice()));
 
         if (!toppings.isEmpty()) {
-            sb.append("  Toppings:\n");
+            stringBuilder.append("  Toppings:\n");
             for (Topping topping : toppings) {
                 double price = topping.getPrice(size);
                 if (price > 0) {
-                    sb.append(String.format("    - %s: $%.2f\n",
+                    stringBuilder.append(String.format("    - %s: $%.2f\n",
                             topping.getName() + (topping.isExtra() ? " (Extra)" : ""),
                             price));
                 } else {
-                    sb.append(String.format("    - %s\n", topping.getName()));
+                    stringBuilder.append(String.format("    - %s\n", topping.getName()));
                 }
             }
         }
 
-        sb.append(String.format("  Total: $%.2f", getPrice()));
-        return sb.toString();
+        stringBuilder.append(String.format("  Total: $%.2f", getPrice()));
+        return stringBuilder.toString();
     }
 }

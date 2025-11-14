@@ -29,10 +29,6 @@ public class Receipt {
         return RECEIPTS_FOLDER + timestamp + ".txt";
     }
 
-    /**
-     * Saves the receipt to a file in the receipts folder
-     * @return true if successful, false otherwise
-     */
     public boolean saveToFile() {
         String fileName = getFileName();
         String receiptContent = generateReceipt();
@@ -47,16 +43,12 @@ public class Receipt {
         }
     }
 
-    /**
-     * Prints the receipt to console
-     */
+
     public void printToConsole() {
         System.out.println(generateReceipt());
     }
 
-    /**
-     * Gets the filename that will be used for this receipt
-     */
+
     public String getReceiptFileName() {
         return getFileName();
     }
