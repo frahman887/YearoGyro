@@ -10,7 +10,7 @@ public enum SandwichSize {
     SMALL("4\"", 5.50, 1.00, 0.50, 0.75, 0.30),
     MEDIUM("8\"", 7.00, 2.00, 1.00, 1.50, 0.60),
     LARGE("12\"", 8.50, 3.00, 1.50, 2.25, 0.90);
-
+// EXTRA_LARGE("18\"",9.25,3.75,1.8,2.50,1.00)
     private final String displayName;
     private final double basePrice;
     private final double meatPrice;
